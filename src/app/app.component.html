@@ -3,7 +3,7 @@
 
 <ul *ngFor="let animal of animals">
     <li> {{ animal.id }} :  {{ animal.name }} 
-    <button (click)="removeAnimal(animal)">REMOVE</button>
+    <button (click)="removeAnimal(animal.id)">REMOVE</button>
     </li>
 </ul>
 <h2> Get some new animals or modify them as you want! </h2>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppService } from './app.service';
+import {  AppService } from './app.service';
 
 interface Animal {
   id: string;
@@ -12,18 +12,26 @@ interface Animal {
   styleUrls: ['./app.component.css'],
   providers: [AppService]
 })
+
 export class AppComponent {
   animals: Animal;
 
   constructor(
     private appService: AppService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.appService.findAnimals()
       .subscribe(
-        (animals) => this.animals = animals,
-        (err) => console.error(err)
+      (animals) => this.animals = animals,
+      (err) => console.error(err)
+      );
+
+    this.appService.removeAnimal()
+      .subscribe(
+      (animals) => this.animals = animals,
+      (err) => console.error(err)
+
       );
   }
 }

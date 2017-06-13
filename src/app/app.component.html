@@ -1,1 +1,14 @@
-<div *ngFor="let animal of animals">{{ animal.name }}</div>
+<h1> Look at this awsome list of animals </h1>
+
+
+<ul *ngFor="let animal of animals">
+    <li> {{ animal.id }} :  {{ animal.name }} 
+    <button (click)="removeAnimal(animal)">REMOVE</button>
+    </li>
+</ul>
+<h2> Get some new animals or modify them as you want! </h2>
+
+<button ng-click="Add">ADD</button>
+<button ng-click="Modify">MODIFY</button>
+<span></span>
+<span></span>

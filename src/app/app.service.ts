@@ -14,6 +14,12 @@ export class AppService {
       .map(this.extractData);
   }
 
+  removeAnimal() {
+    return this.http.get('http://localhost:8000/animals/{animalId}')
+      .map(this.extractData);
+  }
+
+
   private extractData(res: Response) {
     return res.json();
   }

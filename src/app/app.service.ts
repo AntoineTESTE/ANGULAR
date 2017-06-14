@@ -36,6 +36,7 @@ export class AppService {
     return this.http.post(`${this.baseUrl}/animals`, payload);
   }
 
+//Conversion Http ->json
   private extractData(res: Response) {
     return res.json();
   }

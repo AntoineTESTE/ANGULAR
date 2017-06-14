@@ -9,7 +9,7 @@ interface Animal {
 }
 
 
-// Le composant fait appel
+// Le composant est appelé
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,6 +20,7 @@ interface Animal {
 export class AppComponent {
   animals: Animal;
   form = { name: '' };
+  message: string;
 
   // constructeur des services de l'API
   constructor(
@@ -48,11 +49,16 @@ export class AppComponent {
 
 // Fonction de mise à jour de l'animal
   update(form) { // si tu appui sur SEND tu envoie le formulaire
-    this.appService[form.id ? 'editAnimal' : 'createAnimal'](form) // si il qu'un id dans le formulaire tu envoie la fonction editAnimal sinon tu creer l'animal
+    const isNew = !form.id;
+    this.appService[isNew ? 'createAnimal' : 'editAnimal'](form) // si il qu'un id dans le formulaire tu envoie la fonction editAnimal sinon tu creer l'animal
       .subscribe( // souscription
-      () => this.ngOnInit(), // retour = fonction d'Init
+      () => {
+        this.message = `${isNew ? 'created' : 'updated'} successfully`;
+        this.ngOnInit();
+      }, // retour = fonction d'Init
       (err) => console.error(err)
       );
+      
   }
 
 
@@ -64,6 +70,7 @@ export class AppComponent {
       () => this.ngOnInit(),  // retour = fonction d'Init
       (err) => console.error(err)
       );
+
   }
 
 }

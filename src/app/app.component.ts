@@ -26,21 +26,21 @@ export class AppComponent {
     private appService: AppService
   ) { }
 
-  // Fonction d'initialisation qui se lance au démarrage et lance la fonction Find
+  // Fonction de démarrage
   ngOnInit() {
-    this.appService.findAnimals()
-      .subscribe(
-      (animals) => this.animals = animals, // (animals) est ce qui est attendu en retour de fonction
-      (err) => console.error(err)
+    this.appService.findAnimals() // le fonction Find est appelé
+      .subscribe( // souscription 
+      (animals) => this.animals = animals, // retour = animaux
+      (err) => console.error(err) // sinon erreur
       );
   }
 
   // Fonction d'initialisation de formulaire (EDIT)
-  initForm(animal: any) { // initilisation du champ du formulaire avec un animal en paramètre
+  initForm(animal: any) { // initialisation du champ du formulaire avec un animal en paramètre
     if (animal) { // si un animal est present
       return this.form = Object.assign({}, animal); //retourne cet objet animal
     }
-    this.form = { // sinon tu renvoi un champ vide
+    this.form = { // sinon tu renvoi un champ vide (qui peut etre mis à jour)
       name: ''
     }
   }
@@ -48,9 +48,9 @@ export class AppComponent {
 
 // Fonction de mise à jour de l'animal
   update(form) { // si tu appui sur SEND tu envoie le formulaire
-    this.appService[form.id ? 'editAnimal' : 'createAnimal'](form) // si il n'a uniquement un id dans le formualaire tu envoie la fonction editAnimal sinon tu creer l'animal
-      .subscribe(
-      () => this.ngOnInit(),
+    this.appService[form.id ? 'editAnimal' : 'createAnimal'](form) // si il qu'un id dans le formulaire tu envoie la fonction editAnimal sinon tu creer l'animal
+      .subscribe( // souscription
+      () => this.ngOnInit(), // retour = fonction d'Init
       (err) => console.error(err)
       );
   }
@@ -61,7 +61,7 @@ export class AppComponent {
   removeAnimal(id: string) { // paramètre passé dans la fonction
     this.appService.removeAnimal(id)
       .subscribe(
-      () => this.ngOnInit(), // () indique si l'on attend quelque chose en retour de la fonction
+      () => this.ngOnInit(),  // retour = fonction d'Init
       (err) => console.error(err)
       );
   }

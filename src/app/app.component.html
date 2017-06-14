@@ -2,13 +2,16 @@
 
 
 <ul *ngFor="let animal of animals">
-    <li> {{ animal.id }} :  {{ animal.name }} 
+    <li> {{ animal.id }} :  {{ animal.name }}
     <button (click)="removeAnimal(animal.id)">REMOVE</button>
+    <button (click)="initForm(animal)">EDIT</button>
     </li>
 </ul>
 <h2> Get some new animals or modify them as you want! </h2>
 
-<button ng-click="Add">ADD</button>
-<button ng-click="Modify">MODIFY</button>
-<span></span>
-<span></span>
+<button (click)="initForm()">ADD</button>
+<input type="text" [(ngModel)]="form.name">
+<button (click)="update(form)">send</button>
+
+
+

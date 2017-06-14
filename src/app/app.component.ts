@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  AppService } from './app.service';
+import { AppService } from './app.service';
 
 
 
@@ -9,7 +9,7 @@ interface Animal {
 }
 
 
-// Le composant fait appel 
+// Le composant fait appel
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,10 +17,9 @@ interface Animal {
   providers: [AppService]
 })
 
-
-
 export class AppComponent {
   animals: Animal;
+  form = { name: '' };
 
 // constructeur des services de l'API
   constructor(
@@ -30,15 +29,25 @@ export class AppComponent {
   ngOnInit() {
     this.appService.findAnimals()
       .subscribe(
-      (animals) => this.animals = animals,
-      (err) => console.error(err)
+        (animals) => this.animals = animals,
+        (err) => console.error(err)
       );
+  }
 
-    this.appService.removeAnimal()
+  initForm(animal: any) {
+    if(animal) {
+      return this.form = animal;
+    }
+    this.form = {
+      name: ''
+    }
+  }
+
+  removeAnimal(id: string) {
+    this.appService.removeAnimal(id)
       .subscribe(
-      (animals) => this.animals = animals,
-      (err) => console.error(err)
-
+        () => this.ngOnInit(),
+        (err) => console.error(err)
       );
   }
 }
